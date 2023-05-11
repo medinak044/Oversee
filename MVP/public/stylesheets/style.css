@@ -1,0 +1,113 @@
+
+body {
+font-family: 'Abril Fatface', cursive;
+font-family: 'Henny Penny', cursive;
+font-family: 'Quicksand', sans-serif;
+font-family: 'Roboto', sans-serif;
+}
+
+/* Control and conform item image sizes */
+.card-image {
+    width: 100%;
+    height: 100px;
+    object-fit: scale-down;
+}
+
+.h1-center{
+    text-align: center;
+    padding-top: 5vh;
+    color: rgb(10, 4, 62);
+}
+
+.banner {
+    height: 100vh;
+    width: 100%;
+
+    background:url('../assets/vinyl.jpg');
+
+    background-position: top;
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-repeat: no-repeat;
+}
+
+.welcome{
+    margin-top: 200px;
+    border-style: solid;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, .7);
+    padding: 10px 10px 10px 10px;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.about {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.privacy {
+    margin-top: 5%;
+    margin-bottom: 5%;
+} 
+
+
+.contact {
+    border-style: solid;
+    border-radius: 15px;
+    width: 55%;
+    height: 60%;
+    margin-bottom: 10%;
+    padding: 10px 10px 10px 10px;
+}
+
+.faq {
+    margin-bottom: 5%;
+}
+.login-container {
+    margin-bottom: 300px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.profile-container {
+    margin-bottom: 200px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.item-container {
+    margin-bottom: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.edit-container {
+    background-color: red;
+}
+
+#the-footer {
+    background: #18191a;
+
+    color: #cfd8dc;
+    padding: 80px 0px;
+    font-size: 16px;
+
+    color: white;
+    padding: 80px 0px;
+    font-size: 14px;
+
+    align-items: center;
+    margin-top: auto;
+}
+
+#the-footer a {
+    color: #cfd8dc;
+    text-decoration: none;
+}
+
+#the-footer div{
+    text-align: center;
+    padding: 10px 0px 10px 10px;
+}
+

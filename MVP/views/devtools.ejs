@@ -1,0 +1,72 @@
+<%- include("partials/header.ejs", {title: ` - Items`, body_id: `items`} )%>
+    <%- include("partials/navbar.ejs", {bg: `dark`})%>
+        <div class="container">
+
+            <h1>Dev Tools Page</h1>
+            <!-- Page will be populated with all users plus a dropdown menu for each box for options -->
+
+            <!-- Session user profile info box plus dropdown menu-->
+            <h2>Current Session User: <%=sessionUser.username %>
+            </h2>
+            <ul>
+                <div class="card">
+                    <div class="card-header"><b>
+                            <%=sessionUser.username %>
+                        </b>
+                        <%=sessionUser._id %>
+                    </div>
+                </div>
+            </ul>
+
+            <!-- Multiple user info boxes plus dropdown menus-->
+            <h2>All Users<b>(<%=users.length%>)</b>:</h2>
+            <ol>
+                <% for( let i=0; i < users.length; i++ ) { %>
+                    <div class="card">
+                        <li>
+                            <div class="card-header">
+                                <b>
+                                    <%=users[i].username %>
+                                </b>
+                                <%=users[i]._id %>
+                                    <form action="/devtools/delete-user/<%=users[i]._id %>" method="post">
+                                        <input class="btn btn-danger" type="submit" value="Delete User">
+                                    </form>
+                                    <!-- <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <form action="/devtools/clear-friendslist/<%=users[i]._id %>" method="post">
+                                                <button type="submit" class="btn btn-primary">Clear friends
+                                                    list</button>
+                                            </form>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                            <form action="/devtools/clear-friendsList/<%=users[i]._id %>" method="post">
+                                <input type="submit" value="Clear friendsList (<%=users[i].friendsList.length%>)">
+                            </form>
+                            <form action="/devtools/clear-itemRequestList/<%=users[i]._id %>" method="post">
+                                <input type="submit"
+                                    value="Clear itemRequestList (<%=users[i].itemRequestList.length%>)">
+                            </form>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Full Name: <%=users[i].firstName %>
+                                        <%=users[i].lastName %>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                    <br>
+                    <% } %>
+            </ol>
+
+        </div>
+        <%- include("partials/footer.ejs")%>

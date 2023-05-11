@@ -1,0 +1,25 @@
+<%- include("partials/header.ejs", {title: ` - Contact Us`, body_id: `contact_us`} )%>
+    <%- include("partials/navbar.ejs", {bg: `dark`})%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-6 my-3">Contact Us</h1>
+                <div class="container contact">
+                    <!-- <button type="button" class="btn-close" aria-label="Close"></button> -->
+                    <div class="mb-5">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="your_email@example.com">
+                    </div>
+                    <div class="mb-5">
+                        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="How may we assist you?"></textarea>
+                        <a href="#" class="btn btn-primary my-3">Send</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include("partials/footer.ejs")%>

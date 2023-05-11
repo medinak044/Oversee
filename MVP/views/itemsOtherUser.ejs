@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs", {title: ` - Profile`, body_id: `profile`} )%>
+<%- include("partials/navbar.ejs", {bg: `dark`})%>
+
+
+        <!-- <a href="/profile">
+            <<<-Back to profile page</a> -->
+                <div class="container">
+                    <h1>
+                        <%=selectedUser.username%>'s Item Inventory
+                    </h1>
+                    <ol>
+                        <% for( let i=0; i < selectedUser.userInventory.length; i++ ) { %>
+                            <div class="card">
+                                <li>
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col d-flex">
+                                                <b>
+                                                    <%= selectedUser.userInventory[i].name%>
+                                                </b>
+                                                <form
+                                                    action="/items-other-user/item-request/<%=selectedUser._id%>/<%=selectedUser.userInventory[i]._id%>"
+                                                    method="post">
+                                                    <input class="btn btn-primary mx-2" type="submit" value="Request Item">
+                                                </form>
+                                            </div>
+                                            <p>Description: <%= selectedUser.userInventory[i].description%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <% } %>
+                    </ol>
+                </div>
+                
+                <%- include("partials/footer.ejs")%>
+

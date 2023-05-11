@@ -1,0 +1,40 @@
+<%- include("partials/header.ejs", {title: ` - Profile`, body_id: `profile`} )%>
+    <%- include("partials/navbar.ejs", {bg: `dark`})%>
+
+        <div class="container">
+            <h1>Users</h1>
+            <!-- Shows all registered users -->
+            <!-- User can search and make item/friend requests -->
+            <h2>Search results<b>(<%=users.length%>)</b>:</h2>
+            <ol>
+                <% for( let i=0; i < users.length; i++ ) { %>
+                    <div class="card">
+                        <li>
+                            <div class="card-header"><b>
+                                    <%=users[i].username %>
+                                </b>
+                                <!-- <img class="card-image"
+                                    src="https://images.unsplash.com/3/www.madebyvadim.com.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1182&q=80"
+                                    alt="item image"> -->
+                                <form action="/users/friend-request/<%=users[i]._id %>" method="post">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span><i class="fas fa-user-plus"></i></span>
+                                    </button>
+                                </form>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Name: <%=users[i].firstName %>
+                                        <%=users[i].lastName %>
+                                </li>
+                                <!-- <li class="list-group-item">User ID: <#%=users[i]._id %>
+                                </li> -->
+                            </ul>
+                        </li>
+                    </div>
+                    <br>
+                    <% } %>
+            </ol>
+        </div>
+
+        <%- include("partials/footer.ejs")%>

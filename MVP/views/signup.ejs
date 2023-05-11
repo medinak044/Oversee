@@ -1,0 +1,34 @@
+<%- include("partials/header.ejs", {title: ` - Profile`, body_id: `profile`} )%>
+
+  <h1 class="h1-center">Oversee Signup!</h1>
+
+  <form class="container" action="/signup" method="post">
+    <div class="mb-3">
+      <label for="firstname" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName">
+    </div>
+    <div class="mb-3">
+      <label for="lastname" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastName">
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" aria-describedby="username">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" aria-describedby="email" name="email">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else. Maybe.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary my-3">Submit</button>
+
+    <br>
+    <a href="/landing_page">
+      <- Back</a>
+  </form>
+  <%- include("partials/footer.ejs")%>

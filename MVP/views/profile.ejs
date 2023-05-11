@@ -1,0 +1,184 @@
+<%- include("partials/header.ejs", {title: ` - Profile`, body_id: `profile`} )%>
+<%- include("partials/navbar.ejs", {bg: `dark`})%>
+
+<div class="profile-container">
+    <h1>Welcome to your Profile, <%=sessionUser.username %>
+    </h1>
+    <h2>Notifications</h2>
+    <ol> Friend Requests <b>(<%=friendRequestObjArr.length%>)</b>:
+        <% for( let i=0; i < friendRequestObjArr.length; i++ ) { %>
+            <div class="card">
+                <li>
+                    <div class="card-header"><b>
+                            <%=friendRequestObjArr[i].username %>
+                        </b>
+                        <div class="row">
+                            <div class="col d-flex">
+                                <form action="/profile/friend-accept/<%=friendRequestObjArr[i]._id %>"
+                                    method="post">
+                                    <button type="submit" class="btn btn-success">
+                                        <span><i class="fas fa-check"></i></span>
+                                    </button>
+                                </form>
+                                <form action="/profile/friend-decline/<%=friendRequestObjArr[i]._id %>"
+                                    method="post">
+                                    <button type="submit" class="btn btn-danger">
+                                        <span><i class="fas fa-times"></i></span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        <% } %>
+    </ol>
+    <ol>Item Requests <b>(<%=itemRequestObjArr.length%>)</b>:
+        <% for( let i=0; i < itemRequestObjArr.length; i++ ) { %>
+            <div class="card">
+                <li>
+                    <div class="card-header">
+                        <b>
+                            <%=itemRequestObjArr[i].itemName %>
+                        </b>
+                        <%#=itemRequestObjArr[i].itemId %>
+                            | <b>
+                                <%=itemRequestObjArr[i].borrowerUsername %>
+                            </b>
+                            <%#=itemRequestObjArr[i].borrowerId %>
+
+                                <div class="row">
+                                    <div class="col d-flex">
+                                        <form
+                                            action="/profile/item-accept/<%=itemRequestObjArr[i].borrowerId %>/<%=itemRequestObjArr[i].itemId %>"
+                                            method="post">
+                                            <button type="submit" class="btn btn-success">
+                                                <span><i class="fas fa-check"></i></span>
+                                            </button>
+                                        </form>
+                                        <form
+                                            action="/profile/item-decline/<%=itemRequestObjArr[i].borrowerId %>/<%=itemRequestObjArr[i].itemId %>"
+                                            method="post">
+                                            <button type="submit" class="btn btn-danger">
+                                                <span><i class="fas fa-times"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                    </div>
+                </li>
+            </div>
+        <% } %>
+    </ol>
+
+    <h2>Friends (<%=friendUserObjArr.length%>)</h2>
+    <ol>
+        <% for( let i=0; i < friendUserObjArr.length; i++ ) { %>
+            <div class="card">
+                <li>
+                    <div class="card-header"><b>
+                            <%=friendUserObjArr[i].username %>
+                        </b>
+                        <div class="row">
+                            <div class="col d-flex">
+                                <form action="/items-other-user/<%=friendUserObjArr[i]._id %>" method="get">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span> View Inventory</span>
+                                    </button>
+                                </form>
+                                <form action="/profile/friend-remove/<%=friendUserObjArr[i]._id %>"
+                                    method="post">
+                                    <button type="submit" class="btn btn-secondary">
+                                        <span><i class="fas fa-times"></i> Remove</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            </div>
+            <% } %>
+    </ol>
+
+    <h2>Borrowed Items (<%=itemBorrowObjArr.length%>)</h2>
+    <ol>
+        <% for( let i=0; i < itemBorrowObjArr.length; i++ ) { %>
+            <div class="card">
+                <li>
+                    <div class="card-header">
+                        Item: <b>
+                            <%=itemBorrowObjArr[i].itemName %>
+                        </b>
+                        <%#=itemBorrowObjArr[i].itemId %>
+                            <br>
+                            Owner:<b>
+                                <%=itemBorrowObjArr[i].ownerUsername %>
+                            </b>
+                            <br>
+                            Borrower:<b>
+                                <%=itemBorrowObjArr[i].borrowerUsername %>
+                            </b>
+                            <div class="row">
+                                <div class="col d-flex">
+                                    <!-- If session user is not the item owner (borrower) -->
+                                    <% if (itemBorrowObjArr[i].sessionUserIsOwner===false) { %>
+                                        <% if (itemBorrowObjArr[i].ownerReturnConfirmed===false &&
+                                            itemBorrowObjArr[i].borrowerReturnConfirmed===false) { %>
+                                            <form
+                                                action="/profile/item-borrower-initiate-return/<%=itemBorrowObjArr[i].borrowerId %>/<%=itemBorrowObjArr[i].itemId %>"
+                                                method="post">
+                                                <button type="submit" class="btn btn-success">
+                                                    <span><i class="fas fa-check"></i> Returned</span>
+                                                </button>
+                                            </form>
+                                            <% } else if (itemBorrowObjArr[i].ownerReturnConfirmed===false &&
+                                                itemBorrowObjArr[i].borrowerReturnConfirmed===true) { %>
+                                                <p>"Waiting for owner
+                                                    response..."</p>
+                                                <% } %>
+
+                                                    <% } else if (itemBorrowObjArr[i].sessionUserIsOwner===true)
+                                                        { %>
+                                                        <% if (itemBorrowObjArr[i].ownerReturnConfirmed===false
+                                                            &&
+                                                            itemBorrowObjArr[i].borrowerReturnConfirmed===false)
+                                                            { %>
+                                                            <p>"Return
+                                                                expected by: mm-dd-yyyy"
+                                                            </p>
+                                                            <% } else if
+                                                                (itemBorrowObjArr[i].ownerReturnConfirmed===false
+                                                                &&
+                                                                itemBorrowObjArr[i].borrowerReturnConfirmed===true)
+                                                                { %>
+                                                            <form
+                                                                action="/profile/item-remove/<%=itemBorrowObjArr[i].borrowerId %>/<%=itemBorrowObjArr[i].itemId %>"
+                                                                method="post">
+                                                                <button type="submit"
+                                                                    class="btn btn-success">
+                                                                    <span><i class="fas fa-check"></i>
+                                                                        Confirm Return</span>
+                                                                </button>
+                                                            </form>
+                                                        <form
+                                                            action="/profile/item-owner-decline-return/<%=itemBorrowObjArr[i].borrowerId %>/<%=itemBorrowObjArr[i].itemId %>"
+                                                            method="post">
+                                                            <button type="submit"
+                                                                class="btn btn-danger">
+                                                    <span><i class="fas fa-times"></i>
+                                                        Decline Return</span>
+                                                </button>
+                                            </form>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                            </div>
+                    </div>
+                </li>
+            </div>
+        <% } %>
+    </ol>
+</div>
+
+<%- include("partials/footer.ejs")%>

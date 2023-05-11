@@ -1,0 +1,59 @@
+<%- include("partials/header.ejs", {title: ` - Items`, body_id: `items`} )%>
+    <%- include("partials/navbar.ejs", {bg: `dark`})%>
+
+<div class="item-container">
+    <h1>Item Inventory</h1>
+    <hr>
+
+    <div class="row">
+        <!-- Item Creation -->
+        <div class="col-lg-6">
+            <form action="/items/item-create" method="post">
+                <h2>Add new item:</h2>
+                <input type="text" name="name" placeholder="enter new item name">
+                <input type="text" name="description" placeholder="enter item description">
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <br>
+            </form>
+        </div>
+        <hr>
+
+        <h2>Items <b>(<%=userInventory.length%>)</b>:</h2>
+        <ol>
+            <% for( let i=0; i < userInventory.length; i++ ) { %>
+                <div class="card">
+                    <li>
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col d-flex">
+                                    <b>
+                                        <%=userInventory[i].name %>
+                                    </b>
+                                    <form action="/itemEdit/<%= userInventory[i]._id %>" method="get">
+                                        <input class="btn btn-primary mx-2" type="submit" value="Edit">
+                                    </form>
+                                    <form action="/items/item-delete/<%= userInventory[i]._id %>" method="post">
+                                        <input class="btn btn-secondary" type="submit" value="Delete">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Condition: <%=userInventory[i].description %>
+                            </li>
+                            <li class="list-group-item">Owner: <%=user.username %>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+                <% } %>
+        </ol>
+    </div>
+</div>
+
+
+<%- include("partials/footer.ejs")%>

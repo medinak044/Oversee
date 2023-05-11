@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs", {title: ` - Items`, body_id: `items`} )%>
+    <%- include("partials/navbar.ejs", {bg: `dark`})%>
+
+<div class="container">
+    <div class="row">
+        <h1>Edit item</h1>
+        <a href="/items">
+            <<<-Back to items page</a>
+
+    <form action="/itemEdit/item-edit/<%= item._id%>" method="post">
+        <input type="text" name="name" placeholder="enter item name">
+        <input type="text" name="description" placeholder="enter item description">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+
+<%- include("partials/footer.ejs")%>
+
